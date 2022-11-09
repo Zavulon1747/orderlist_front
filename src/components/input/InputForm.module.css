@@ -1,0 +1,16 @@
+.listProds {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.itemProd {
+    margin-bottom: 10px;
+
+}
+
+.inputField {
+    margin: 20px;
+    width: 50%;
+}

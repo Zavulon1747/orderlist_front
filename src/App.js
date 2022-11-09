@@ -1,25 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import {useEffect, useState} from "react";
+import InputForm from "./components/input/InputForm";
+import axios from "axios";
+import PostService from "./components/PostService";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [value, setValue] = useState('')
+
+    const [post, setPost] = useState([
+        {id: 1, name: '', amount: 0, department: '', priceOfSelling: 1.1, created: new Date(),  modified: new Date(), needCancel: false, removed: false}
+
+    ])
+
+    async function fetchPosts() {
+        const posts = await PostService.getAll()
+        console.log(posts)
+        setPost(posts)
+    }
+
+    useEffect(() => {
+        fetchPosts()
+    }, [])
+
+
+    return (
+        <div>
+            <InputForm post={post} setPost={setPost} value={value} setValue={setValue} />
+        </div>
+    );
 }
 
 export default App;
